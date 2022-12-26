@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import * as BooksAPI from "./BooksAPI";
+import styles from "./App.module.css";
+import Bookshelf from "./components/BookShelf";
+import { useNavigate } from "react-router-dom";
 
-function App() {
+const bookshelves = [
+  { title: "Currently Reading", shelfName: "currentlyReading" },
+  { title: "Want to Read", shelfName: "wantToRead" },
+  { title: "Read", shelfName: "read" }
+];
+
+const App = () => {
+  const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    BooksAPI.getAll().then(booksFromApi => {
+      setBooks(booksFromApi);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className={styles.listbooks}>
+        <div className={styles.listbookstitle}>
+          <h1>My Reads</h1>
+        </div>
+        <div className={styles.listbookscontent}>
+          <div>
+            {bookshelves.map((bookshelf, index) => (
+              <Bookshelf
+                key={index}
+                title={bookshelf.title}
+                books={
+                  books &&
+                  books.filter(
+                    book => book && book.shelf === bookshelf.shelfName
+                  )
+                }
+                setBooks={setBooks}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.opensearch}>
+          <button onClick={() => navigate("/search")}>Add a book</button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

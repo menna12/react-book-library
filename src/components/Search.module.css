@@ -1,0 +1,68 @@
+.searchbooksbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    z-index: 5;
+    display: flex;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+  }
+  
+  .searchbooksinputwrapper {
+    flex: 1;
+    background: rgb(255, 255, 255);
+  }
+  
+  .searchbooksbar input {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 1.25em;
+    border: none;
+    outline: none;
+  }
+  
+  .closesearch {
+    display: block;
+    top: 20px;
+    left: 15px;
+    width: 50px;
+    height: 55px;
+    background-image: url("../icons/arrow-back.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 0;
+    border: none;
+    outline: none;
+    background-color: rgb(228, 228, 228);
+  }
+  
+  button:active {
+    border: red;
+    outline: none;
+  }
+  
+  .searchbooksresults {
+    padding: 80px 10px 20px;
+  }  
+  .booksgrid {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .booksgrid li {
+    padding: 10px 15px;
+    text-align: left;
+  }
+  
+.noresultmsg {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: row;
+    font-size: xx-large;
+}
